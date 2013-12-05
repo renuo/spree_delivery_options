@@ -1,3 +1,9 @@
+WORK IN PROGRESS
+================
+
+Currently working on getting this gem ready for spree-core 2.1.3, since the original one hasn't been updated for a while.
+
+
 Spree Delivery Date
 =================
 
