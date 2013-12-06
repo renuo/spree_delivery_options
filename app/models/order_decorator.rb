@@ -3,11 +3,15 @@ Spree::Order.class_eval do
   require 'spree/order/checkout'
 
   DELIVERY_CUTOFF_HOUR = 12
+  DELIVERY_TIME_OPTIONS = {
+    early_morning: 'Between 6am-8am'
+  }
 
   validates :delivery_date, presence: true, allow_nil: false
   validate :delivery_date_rules
 
   validates :delivery_time, presence: true, allow_nil: false
+  validates :delivery_time, inclusion: {:in => DELIVERY_TIME_OPTIONS.values, :message => "value is not valid"}
 
   def delivery_date_rules
     return unless self.delivery_date

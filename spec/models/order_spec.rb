@@ -53,8 +53,20 @@ describe Spree::Order do
 
     end
 
+    it 'should accept valid delivery time' do
+      order = Spree::Order.new(delivery_time: DELIVERY_TIME_OPTIONS[:early_morning])
+      order.valid?
+      order.errors[:delivery_time].should be_empty
+    end
+
     it 'should require delivery time' do
       order = Spree::Order.new
+      order.valid?.should == false
+      order.errors[:delivery_time].should_not be_empty
+    end
+
+    it 'should require a valid option for delivery time' do
+      order = Spree::Order.new(delivery_time: 'crazy times!')
       order.valid?.should == false
       order.errors[:delivery_time].should_not be_empty
     end
