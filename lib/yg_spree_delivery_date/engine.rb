@@ -1,7 +1,9 @@
 module YgSpreeDeliveryDate
   class Engine < Rails::Engine
     require 'spree/core'
+    require 'spree/frontend'
     isolate_namespace Spree
+
     engine_name 'yg_spree_delivery_date'
 
     config.autoload_paths += %W(#{config.root}/lib)
