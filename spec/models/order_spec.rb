@@ -53,6 +53,12 @@ describe Spree::Order do
 
     end
 
+    it 'should require delivery time' do
+      order = Spree::Order.new
+      order.valid?.should == false
+      order.errors[:delivery_time].should_not be_empty
+    end
+
   end
   
 end

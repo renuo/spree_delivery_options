@@ -7,6 +7,8 @@ Spree::Order.class_eval do
   validates :delivery_date, presence: true, allow_nil: false
   validate :delivery_date_rules
 
+  validates :delivery_time, presence: true, allow_nil: false
+
   def delivery_date_rules
     return unless self.delivery_date
     self.errors[:delivery_date] << 'cannot be today or in the past' if self.delivery_date <= Date.today
