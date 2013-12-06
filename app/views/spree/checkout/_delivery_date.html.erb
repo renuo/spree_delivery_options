@@ -1,4 +1,6 @@
 <p id="delivery_date">
   <%= form.label :delivery_date, "Delivery Date" %><br />
-  <%= form.date_select :delivery_date %>
+  <%= form.date_select :delivery_date %><br />
+  <%= form.label :delivery_time, "Delivery Time" %><br />
+  <%= form.select :delivery_time, DELIVERY_TIME_OPTIONS.values, {}
 </p>
