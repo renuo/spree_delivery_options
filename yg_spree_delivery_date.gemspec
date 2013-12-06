@@ -1,15 +1,14 @@
 # encoding: UTF-8
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_delivery_date'
-  s.version     = '1.3.2'
+  s.name        = 'yg_spree_delivery_date'
+  s.version     = '1.0.0'
   s.summary     = 'Adds a delivery date field in the delivery section of checkout'
   s.description = 'Adds a delivery date field in the delivery section of the checkout. Allows admin to view that delivery date in the order details.'
   s.required_ruby_version = '>= 1.8.7'
 
-  s.author    = 'Scott Ringwelski'
-  s.email     = 'sgringwe@mtu.edu'
-  s.homepage  = 'http://www.spreecommerce.com'
+  s.author    = 'Francisco Trindade'
+  s.email     = 'frank.trindade@gmail.com'
 
   #s.files       = `git ls-files`.split("\n")
   #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")

@@ -1,4 +1,4 @@
-module SpreeDeliveryDate
+module YgSpreeDeliveryDate
   module Generators
     class InstallGenerator < Rails::Generators::Base
 
@@ -6,11 +6,10 @@ module SpreeDeliveryDate
       end
 
       def add_stylesheets
-        inject_into_file 'app/assets/stylesheets/store/all.css', " *= require store/spree_delivery_date\n", :before => /\*\//, :verbose => true
       end
 
       def add_migrations
-        run 'bundle exec rake railties:install:migrations FROM=spree_delivery_date'
+        run 'bundle exec rake railties:install:migrations FROM=yg_spree_delivery_date'
       end
 
       def run_migrations

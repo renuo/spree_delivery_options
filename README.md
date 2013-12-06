@@ -1,27 +1,23 @@
-WORK IN PROGRESS
-================
-
-Currently working on getting this gem ready for spree-core 2.1.3, since the original one hasn't been updated for a while.
-
-
-Spree Delivery Date
+Your Grocer Spree Delivery Date 
 =================
 
-Requires user to enter a delivery date during checkout (delivery section). The delivery date must be tomorrow or later.
+This gem is a fork from [spree_delivery_date](from 'https://github.com/sgringwe/spree_delivery_date'), and it has been updated to work with spree_core 2.1.3, as well as other changes. 
 
-* Uses validation to ensure the user specifies a date tomorrow or later.
+Requires user to enter a delivery date during checkout (delivery section).
+
 * Shows delivery date during checkout confirmation.
 * Shows delivery date when viewing or editing order as admin.
 * Allows admin to filter orders by delivery date (date range).
 * Allows admin to sort orders by delivery date.
 * Adds delivery date column to orders index page table.
 
+
 Installing
 =======
 
 Add the gem to your Gemfile
 
-    $ gem 'spree_delivery_date', :git => 'git@github.com:sgringwe/spree_delivery_date.git'
+    $ gem 'yg_spree_delivery_date'
 
 bundle with
   
@@ -29,13 +25,7 @@ bundle with
 
 and run
 
-    $ rails g spree_delivery_date:install
+    $ rails g yg_spree_delivery_date:install
 
 to install and (be asken to) run the migrations. This migration simply adds the delivery_date field to Spree::Order.
 
-Remaining Features
-==================
-
-The only remaining feature I can think to implement is an option for users to specify their own custom validation method
-for validating the delivery date. With this option, users of this plugin could specify custom rules such as no deliveries
-on weekends, require 3 days for preperation (instead of 1 day as of current), etc.
