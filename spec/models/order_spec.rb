@@ -6,7 +6,6 @@ describe Spree::Order do
 
   describe "validations" do
 
-
     describe 'delivery date' do
 
       it 'should require delivery date' do
@@ -27,7 +26,7 @@ describe Spree::Order do
       end
 
       it 'should not be valid if delivery date is tomorrow and it is past the cutoff time' do
-        time_now = DateTime.parse("20/11/2013 #{DELIVERY_CUTOFF_HOUR}:01 +1100")
+        time_now = DateTime.parse("20/11/2013 #{Spree::Config.delivery_cut_off_hour}:01 +1100")
         Timecop.freeze(time_now)
 
         order.delivery_date = '21/11/2013'
@@ -37,7 +36,7 @@ describe Spree::Order do
       end
 
       it 'should be valid if delivery date is tomorrow but is before the cutoff time' do
-        time_now = DateTime.parse("20/11/2013 #{DELIVERY_CUTOFF_HOUR-1}:59 +1100")
+        time_now = DateTime.parse("20/11/2013 #{Spree::Config.delivery_cut_off_hour-1}:59 +1100")
         Timecop.freeze(time_now)
 
         order.delivery_date = '21/11/2013'
@@ -47,7 +46,7 @@ describe Spree::Order do
       end
 
       it 'should be valid if delivery date is after tomorrow' do
-        time_now = DateTime.parse("20/11/2013 #{DELIVERY_CUTOFF_HOUR+1}:30 +1100")
+        time_now = DateTime.parse("20/11/2013 #{Spree::Config.delivery_cut_off_hour+1}:30 +1100")
         Timecop.freeze(time_now)
 
         order.delivery_date = '22/11/2013'
@@ -61,7 +60,9 @@ describe Spree::Order do
     describe 'delivery time' do
 
       it 'should accept valid delivery time' do
-        order.delivery_time = DELIVERY_TIME_OPTIONS[:early_morning]
+        delivery_time_options = JSON.parse(Spree::Config.delivery_time_options)
+        pp delivery_time_options
+        order.delivery_time = delivery_time_options["early_morning"]
         order.valid_delivery_time?
         order.errors[:delivery_time].should be_empty
       end
