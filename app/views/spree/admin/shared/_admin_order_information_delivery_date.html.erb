@@ -4,3 +4,9 @@
 <% else %>
   <dd id='delivery_date'>Unknown</dd>
 <% end %>
+<dt><%= t(:delivery_time) %>:</dt>
+<% if @order.delivery_time != nil %>
+  <dd id='delivery_time'><%= @order.delivery_time %></dd>
+<% else %>
+  <dd id='delivery_time'>Unknown</dd>
+<% end %>
