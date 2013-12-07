@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'yg_spree_delivery_date'
-  s.version     = '1.0.1'
+  s.version     = '1.0.2'
   s.summary     = 'Adds a delivery date field in the delivery section of checkout'
   s.description = 'Adds a delivery date field in the delivery section of the checkout. Allows admin to view that delivery date in the order details.'
   s.required_ruby_version = '>= 1.8.7'
