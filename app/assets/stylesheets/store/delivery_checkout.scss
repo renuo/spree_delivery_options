@@ -1,0 +1,11 @@
+@import 'store/variables';
+
+#shipping_method {
+  .stock-delivery-date-title {
+    background-color: lighten($body_text_color, 70);
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size :11px;
+   }
+}
