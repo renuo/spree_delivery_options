@@ -10,6 +10,6 @@ task :default => [:spec]
 
 desc 'Generates a dummy app for testing'
 task :test_app do
-  ENV['LIB_NAME'] = 'yg_spree_delivery_date'
+  ENV['LIB_NAME'] = 'spree_delivery_options'
   Rake::Task['common:test_app'].invoke
 end

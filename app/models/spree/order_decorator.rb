@@ -8,9 +8,9 @@ Spree::Order.class_eval do
     if self.delivery_date
       self.errors[:delivery_date] << 'cannot be today or in the past' if self.delivery_date <= Date.today
 
-      cutoff_time = Time.now.change(hour: YgSpreeDeliveryDate::Config.delivery_cut_off_hour)
+      cutoff_time = Time.now.change(hour: SpreeDeliveryOptions::Config.delivery_cut_off_hour)
       if self.delivery_date == Date.tomorrow && Time.now > cutoff_time
-        self.errors[:delivery_date] << "cannot be tomorrow if the order is created after #{YgSpreeDeliveryDate::Config.delivery_cut_off_hour}"
+        self.errors[:delivery_date] << "cannot be tomorrow if the order is created after #{SpreeDeliveryOptions::Config.delivery_cut_off_hour}"
       end
     end
 
@@ -21,7 +21,7 @@ Spree::Order.class_eval do
     self.errors[:delivery_time] << 'cannot be blank' unless self.delivery_time
 
     if self.delivery_time
-      delivery_time_options = JSON.parse(YgSpreeDeliveryDate::Config.delivery_time_options)
+      delivery_time_options = JSON.parse(SpreeDeliveryOptions::Config.delivery_time_options)
       self.errors[:delivery_time] << 'is invalid' unless delivery_time_options.values.include?(self.delivery_time)
     end
 
