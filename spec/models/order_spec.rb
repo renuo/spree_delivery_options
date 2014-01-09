@@ -79,6 +79,22 @@ describe Spree::Order do
 
     end
 
+    describe 'delivery instructions' do
+
+      it 'should accept valid delivery instructions' do
+        order.delivery_instructions = "This is awesome"
+        order.valid_delivery_instructions?.should be_true
+        order.errors[:delivery_instructions].should be_empty
+      end
+
+      it 'should not accept delivery instructions that are too long' do
+        order.delivery_instructions = "A" * 501
+        order.valid_delivery_instructions?.should be_false
+        order.errors[:delivery_instructions].should_not be_empty
+      end
+
+    end
+
 
   end
 
