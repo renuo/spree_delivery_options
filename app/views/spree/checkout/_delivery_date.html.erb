@@ -3,5 +3,5 @@
   <%= form.label :delivery_date, "Delivery Date" %><br />
   <%= form.date_select :delivery_date, default: Date.yesterday %><br />
   <%= form.label :delivery_time, "Delivery Time" %><br />
-  <%= form.select :delivery_time, JSON.parse(YgSpreeDeliveryDate::Config.delivery_time_options).values, {}
+  <%= form.select :delivery_time, JSON.parse(SpreeDeliveryOptions::Config.delivery_time_options).values, {}
 </p>

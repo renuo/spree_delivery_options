@@ -10,7 +10,7 @@ module SpreeDeliveryOptions
       end
 
       def add_migrations
-        run 'bundle exec rake railties:install:migrations FROM=yg_spree_delivery_date'
+        run 'bundle exec rake railties:install:migrations FROM=spree_delivery_options'
       end
 
       def run_migrations
