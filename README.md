@@ -25,7 +25,7 @@ Installation
 
 Add the gem to your Gemfile
 
-    $ gem 'yg_spree_delivery_date'
+    $ gem 'spree_delivery_options'
 
 bundle with
   
@@ -33,7 +33,7 @@ bundle with
 
 and run
 
-    $ rails g yg_spree_delivery_date:install
+    $ rails g spree_delivery_options:install
 
 to install and (be asken to) run the migrations. This migration simply adds the delivery_date field to Spree::Order.
 
@@ -47,7 +47,7 @@ Both the delivery cut off hour and the delivery time options can be configured i
           pre_dawn: "Before 6am",        
           early_morning: "Between 6am-8am"
         }.to_json
-        YgSpreeDeliveryDate::Config.delivery_time_options = delivery_time_options
-        YgSpreeDeliveryDate::Config.delivery_cut_off_hour = 12
+        SpreeDeliveryOptions::Config.delivery_time_options = delivery_time_options
+        SpreeDeliveryOptions::Config.delivery_cut_off_hour = 12
       end       
 
