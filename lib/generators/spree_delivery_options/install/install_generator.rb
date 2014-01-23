@@ -2,7 +2,8 @@ module SpreeDeliveryOptions
   module Generators
     class InstallGenerator < Rails::Generators::Base
 
-      def add_javascripts
+      def add_javascripts 
+        append_file 'app/assets/javascripts/store/all.js', "//= require store/spree_delivery_options\n"
       end
 
       def add_stylesheets
