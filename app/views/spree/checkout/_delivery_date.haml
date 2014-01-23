@@ -3,10 +3,10 @@
 #delivery_date
   .field
     = form.label :delivery_date, "Delivery Date"
-    = form.date_select :delivery_date
+    = form.date_field :delivery_date
   .field
     = form.label :delivery_time, "Delivery Time"
-    = form.select :delivery_time, JSON.parse(SpreeDeliveryOptions::Config.delivery_time_options).values, {}
+    = form.select :delivery_time, JSON.parse(SpreeDeliveryOptions::Config.delivery_time_options)["monday"]
 %h5.stock-delivery-instructions-title
   Delivery Instructions/Comments
 #delivery_instructions
