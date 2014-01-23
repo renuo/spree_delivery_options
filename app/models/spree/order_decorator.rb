@@ -11,10 +11,18 @@ Spree::Order.class_eval do
   end
 
   def valid_delivery_date?
+    delivery_options = JSON.parse(SpreeDeliveryOptions::Config.delivery_time_options)
+
     self.errors[:delivery_date] << 'cannot be blank' unless self.delivery_date
 
     if self.delivery_date
       self.errors[:delivery_date] << 'cannot be today or in the past' if self.delivery_date <= Date.today
+
+      week_day = self.delivery_date.strftime("%A")
+      options = delivery_options[week_day.downcase]
+      unless options
+        self.errors[:delivery_date] << "cannot be on a #{week_day}"
+      end
 
       cutoff_time = Time.now.change(hour: SpreeDeliveryOptions::Config.delivery_cut_off_hour)
       if self.delivery_date == Date.tomorrow && Time.now > cutoff_time
