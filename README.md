@@ -43,11 +43,11 @@ Configuration
 Both the delivery cut off hour and the delivery time options can be configured in your application.rb file
 
      config.after_initialize do
-        delivery_time_options = {      
-          pre_dawn: "Before 6am",        
-          early_morning: "Between 6am-8am"
+        delivery_time_options = {
+          monday: ["Before 6am", "9-12 am"],
+          tuesday: ["Before 6am", "9-12 am"]
         }.to_json
         SpreeDeliveryOptions::Config.delivery_time_options = delivery_time_options
         SpreeDeliveryOptions::Config.delivery_cut_off_hour = 12
-      end       
+      end
 
