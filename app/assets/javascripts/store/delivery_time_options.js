@@ -2,6 +2,10 @@ function SpreeDeliveryOptions() {
 
   var that = this;
 
+  this.initializeDatePicker = function() {
+     $('#order_delivery_date').datepicker({dateFormat: "dd/mm/yy"});
+  };
+
   this.initializeDeliveryTimeSelect = function() {
     this.update_delivery_time_options();
 
@@ -15,7 +19,8 @@ function SpreeDeliveryOptions() {
 
     if (delivery_time_options){
       weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-      day_index = new Date($('#order_delivery_date').val()).getDay();
+      var dateParts = $('#order_delivery_date').val().split('/')
+      day_index = new Date(dateParts[2], dateParts[1]-1, dateParts[0]).getDay();
       weekday = weekdays[day_index];
 
       day_options = delivery_time_options[weekday];
@@ -40,5 +45,6 @@ function SpreeDeliveryOptions() {
 
 $(document).ready(function() {
   var deliveryOptions = new SpreeDeliveryOptions();
+  deliveryOptions.initializeDatePicker();
   deliveryOptions.initializeDeliveryTimeSelect();
 });

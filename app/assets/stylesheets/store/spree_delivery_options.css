@@ -1,4 +1,5 @@
 /*
  *= require store/spree_frontend
  *= require store/delivery_checkout
+ *= require_tree ../store/jquery_ui_flick/
  */
