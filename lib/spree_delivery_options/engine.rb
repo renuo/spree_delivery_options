@@ -1,6 +1,7 @@
 module SpreeDeliveryOptions
   class Engine < Rails::Engine
     require 'spree/core'
+
     isolate_namespace Spree
 
     initializer "spree.spree_delivery_options.preferences", :after => "spree.environment" do |app|
@@ -17,7 +18,10 @@ module SpreeDeliveryOptions
     end
 
     def self.activate
-      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
+      Dir.glob(File.join(File.dirname(__FILE__), '../../app/controllers/**/*.rb')) do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
+      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*decorator*.rb')) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
     end
