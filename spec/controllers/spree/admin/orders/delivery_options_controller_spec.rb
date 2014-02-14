@@ -34,6 +34,12 @@ describe Spree::Admin::Orders::DeliveryOptionsController do
       spree_post :update, order: {delivery_date: tomorrow}
     end
 
+    it 'should call next if update is successful' do
+      order.should_receive(:update_attributes).with({"delivery_date" => tomorrow}).and_return(true)
+      order.should_receive(:next)
+      spree_post :update, order: {delivery_date: tomorrow}
+    end
+
     it 'should render edit when successful' do
       spree_post :update, order: {delivery_date: tomorrow}
       response.should render_template(:edit)

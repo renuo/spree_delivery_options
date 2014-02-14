@@ -9,7 +9,10 @@ module Spree
 
         def update
           @order = Order.find_by(number: params[:order_id])
-          @order.update_attributes(delivery_options_params)
+          if @order.update_attributes(delivery_options_params) && @order.next
+            flash[:success] = Spree.t('delivery_options_updated')
+          end
+
           render :edit
         end
 
