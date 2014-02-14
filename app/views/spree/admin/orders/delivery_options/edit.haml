@@ -10,5 +10,26 @@
 
 = render :partial => 'spree/shared/error_messages', :locals => { :target => @order }
 
--# = form_for @order, :url => admin_order_customer_url(@order) do |f| %>
--#   = render 'form', :f => f %>  
+#delivery-options-form
+  .delivery-time-options{data: SpreeDeliveryOptions::Config.delivery_time_options}
+
+  = form_for @order, :url => admin_order_delivery_options_url(@order) do |f|
+    %fieldset(data-hook="admin_delivery_options_form_fields" class="no-border-top")
+      %fieldset(class="index no-border-bottom")
+        %legend(align="center")= Spree.t(:delivery_options)
+        %div(data-hook="delivery_options_fields" class="row")
+          .alpha.twelve.columns
+            .field
+              = f.label :delivery_date, "Delivery Date"
+              = f.text_field :delivery_date, class: "datepicker"
+            .field
+              - selected_delivery_day = (@order.delivery_date || Date.today).strftime('%A').downcase
+              .selected-delivery-time{data: @order.delivery_time}
+              = f.label :delivery_time, "Delivery Time"
+              = f.select :delivery_time, JSON.parse(SpreeDeliveryOptions::Config.delivery_time_options)[selected_delivery_day]
+            .field
+              = f.label :delivery_instructions, "Delivery Instructions"
+              = f.text_area :delivery_instructions, class: 'fullwidth'
+
+            .form-buttons.filter-actions.actions
+              = button Spree.t('actions.update'), 'icon-refresh'

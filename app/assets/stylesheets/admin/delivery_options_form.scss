@@ -1,0 +1,15 @@
+#delivery-options-form {
+  .field {
+    label {
+      display: block;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+  }
+
+  .delivery-time-options {
+    display: none;
+  }
+}
