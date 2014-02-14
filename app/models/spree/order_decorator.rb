@@ -3,7 +3,7 @@ Spree::Order.class_eval do
   require 'spree/order/checkout'
 
   def valid_delivery_instructions?
-    if self.delivery_instructions.length > 500
+    if self.delivery_instructions && self.delivery_instructions.length > 500
       self.errors[:delivery_instructions] << 'cannot be longer than 500 charachters'
       return false
     end
