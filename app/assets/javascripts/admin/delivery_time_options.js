@@ -3,11 +3,13 @@ function SpreeDeliveryOptions() {
   var that = this;
 
   this.initializeDeliveryTimeSelect = function() {
-    this.update_delivery_time_options();
+    if ($('#order_delivery_date').length > 0) {
+      this.update_delivery_time_options();
 
-    $('#order_delivery_date').change(function(event){
-      that.update_delivery_time_options();
-    });
+      $('#order_delivery_date').change(function(event){
+        that.update_delivery_time_options();
+      });
+    }
   };
 
   this.update_delivery_time_options = function() {
