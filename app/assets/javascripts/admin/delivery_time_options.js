@@ -13,9 +13,9 @@ function SpreeDeliveryOptions() {
   };
 
   this.update_delivery_time_options = function() {
-    delivery_time_options = $.parseJSON($('.delivery-time-options').attr("data"));
+    var deliveryTimeOptions = $.parseJSON($('.delivery-time-options').attr("data"));
 
-    if (delivery_time_options){
+    if (deliveryTimeOptions){
       weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
       var dateParts = []
@@ -24,12 +24,28 @@ function SpreeDeliveryOptions() {
       } else {
         dateParts = $('#order_delivery_date').val().split('-')
       }
-      day_index = new Date(dateParts[0], dateParts[1]-1, dateParts[2]).getDay();
-      weekday = weekdays[day_index];
 
-      day_options = delivery_time_options[weekday];
-      this.populate_delivery_time(day_options);
+      var deliveryDate = this.convertDateFormat(dateParts);
+      var dayOptions = [];
+      if (deliveryTimeOptions[deliveryDate]) {
+        dayOptions = deliveryTimeOptions[deliveryDate];
+      } else {
+        dayIndex = new Date(dateParts[0], dateParts[1]-1, dateParts[2]).getDay();
+        weekday = weekdays[dayIndex];
+        dayOptions = deliveryTimeOptions[weekday];
+      }
+      this.populate_delivery_time(dayOptions);
     }
+  };
+
+  this.convertDateFormat = function(dateParts) {
+    var day = dateParts[2];
+    var month = parseInt(dateParts[1]);
+    if (month < 10) {
+      month = '0' + month;
+    }
+    var year = dateParts[0];
+    return '' + day + '/' + month + '/' + year;
   };
 
   this.populate_delivery_time = function(options) {
