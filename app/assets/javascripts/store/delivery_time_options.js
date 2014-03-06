@@ -15,16 +15,24 @@ function SpreeDeliveryOptions() {
   };
 
   this.update_delivery_time_options = function() {
-    delivery_time_options = $.parseJSON($('.delivery-time-options').attr("data"));
+    deliveryTimeOptions = $.parseJSON($('.delivery-time-options').attr("data"));
 
-    if (delivery_time_options){
+    if (deliveryTimeOptions){
       weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-      var dateParts = $('#order_delivery_date').val().split('/')
-      day_index = new Date(dateParts[2], dateParts[1]-1, dateParts[0]).getDay();
-      weekday = weekdays[day_index];
+      
+      var dayOptions = [];
+      var deliveryDate = $('#order_delivery_date').val();
 
-      day_options = delivery_time_options[weekday];
-      this.populate_delivery_time(day_options);
+      if (deliveryTimeOptions[deliveryDate]) {
+        dayOptions = deliveryTimeOptions[deliveryDate];
+      } else {
+        var dateParts = deliveryDate.split('/')
+        var dayIndex = new Date(dateParts[2], dateParts[1]-1, dateParts[0]).getDay();
+        weekday = weekdays[dayIndex];
+
+        dayOptions = deliveryTimeOptions[weekday];
+      }
+      this.populate_delivery_time(dayOptions);
     }
   };
 
