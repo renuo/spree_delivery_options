@@ -132,6 +132,26 @@ describe Spree::Order do
 
     end
 
+    describe "overriding delivery day with specific date" do
+
+      before :each do
+        SpreeDeliveryOptions::Config.delivery_time_options = {monday: ['Between 6-7am'], '03/03/2014' => ['Between 9-12am']}.to_json
+      end
+
+      it 'should not allow delivery time to be in an invalid slot for the delivery day' do
+        time_now = DateTime.parse("01/03/2014")
+        Timecop.freeze(time_now)
+
+        order.delivery_date =  Date.parse('03/03/2014')
+        order.delivery_time = 'Between 6-7am'
+
+        order.valid_delivery_time?.should == false
+        order.errors[:delivery_time].should_not be_empty
+        Timecop.return
+      end
+
+    end
+
     describe "validating delivery time in specific week day" do
 
       before :each do

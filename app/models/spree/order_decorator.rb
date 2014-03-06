@@ -17,7 +17,7 @@ Spree::Order.class_eval do
     if self.delivery_date
       self.errors[:delivery_date] << 'cannot be today or in the past' if self.delivery_date <= Date.today
 
-      options = week_day_options(self.delivery_date)
+      options = delivery_time_options(self.delivery_date)
       unless options
         self.errors[:delivery_date] << "is not available on the selected week day."
       end
@@ -37,7 +37,7 @@ Spree::Order.class_eval do
     self.errors[:delivery_time] << 'cannot be blank' unless self.delivery_time
 
     if self.delivery_time
-      self.errors[:delivery_time] << 'is invalid' unless (week_day_options(self.delivery_date) && week_day_options(self.delivery_date).include?(self.delivery_time))
+      self.errors[:delivery_time] << 'is invalid' unless (delivery_time_options(self.delivery_date) && delivery_time_options(self.delivery_date).include?(self.delivery_time))
     end
 
     self.errors[:delivery_time].empty? ? true : false
@@ -45,7 +45,10 @@ Spree::Order.class_eval do
 
   private
 
-  def week_day_options(date)
+  def delivery_time_options(date)
+    date_string = date.strftime("%d/%m/%Y")
+    return delivery_options[date_string] if delivery_options[date_string]
+
     week_day = date.strftime("%A")
     delivery_options[week_day.downcase]
   end
