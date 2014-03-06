@@ -80,8 +80,18 @@ describe Spree::Order do
         order.errors[:delivery_date].should_not be_empty
       end
 
-      it 'should not be valid if delivery date is tomorrow and it is past the cutoff time' do
-        time_now = DateTime.parse("17/11/2013 #{SpreeDeliveryOptions::Config.delivery_cut_off_hour}:01 +1100")
+      it 'should be valid if delivery date is tomorrow and it is past the cutoff time by less than 15 min' do
+        time_now = DateTime.parse("17/11/2013 #{SpreeDeliveryOptions::Config.delivery_cut_off_hour}:14 +1100")
+        Timecop.freeze(time_now)
+
+        order.delivery_date = '18/11/2013'
+        order.valid_delivery_date?.should == true
+        order.errors[:delivery_date].should be_empty
+        Timecop.return
+      end
+
+      it 'should not be valid if delivery date is tomorrow and it is past the cutoff time + 15 min' do
+        time_now = DateTime.parse("17/11/2013 #{SpreeDeliveryOptions::Config.delivery_cut_off_hour}:16 +1100")
         Timecop.freeze(time_now)
 
         order.delivery_date = '18/11/2013'

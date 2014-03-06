@@ -23,7 +23,7 @@ Spree::Order.class_eval do
       end
 
       cutoff_time = Time.now.change(hour: SpreeDeliveryOptions::Config.delivery_cut_off_hour)
-      if self.delivery_date == Date.tomorrow && Time.now > cutoff_time
+      if self.delivery_date == Date.tomorrow && Time.now > (cutoff_time + 15.minutes)
         self.errors[:delivery_date] << "cannot be tomorrow if the order is created after 1pm"
       end
     end
