@@ -11,16 +11,9 @@ Spree::Order.class_eval do
   end
 
   def valid_delivery_date?
-
     self.errors[:delivery_date] << 'cannot be blank' unless self.delivery_date
-
     if self.delivery_date
       self.errors[:delivery_date] << 'cannot be today or in the past' if self.delivery_date <= Date.today
-
-      options = delivery_time_options(self.delivery_date)
-      unless options
-        self.errors[:delivery_date] << "is not available on the selected week day."
-      end
 
       cutoff_time = Time.now.change(hour: SpreeDeliveryOptions::Config.delivery_cut_off_hour)
       if self.delivery_date == Date.tomorrow && Time.now > (cutoff_time + 15.minutes)
@@ -60,10 +53,7 @@ Spree::Order.class_eval do
 end
 
 Spree::PermittedAttributes.checkout_attributes << :delivery_date
-Spree::PermittedAttributes.checkout_attributes << :delivery_time
 Spree::PermittedAttributes.checkout_attributes << :delivery_instructions
 
-Spree::Order.state_machine.before_transition :to => :payment, :do => :valid_delivery_instructions?
 Spree::Order.state_machine.before_transition :to => :payment, :do => :valid_delivery_date?
-Spree::Order.state_machine.before_transition :to => :payment, :do => :valid_delivery_time?
 

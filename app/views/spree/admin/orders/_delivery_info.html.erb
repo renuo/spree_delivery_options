@@ -1,0 +1,27 @@
+<fieldset id="delivery-info" class="no-border-bottom">
+  <legend><%= Spree.t(:delivery_info) %></legend>
+  <table>
+    <thead>
+    <tr>
+      <th><%= Spree.t(:date) %></th>
+      <th><%= Spree.t(:time) %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td> <%= @order.delivery_date %></td>
+      <td> <%= @order.delivery_time %></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="delivery-instructions">
+    <label><%= Spree.t(:delivery_instructions) %></label>
+    <span>
+      <% if @order.delivery_instructions.nil? %>
+        No instructions provided
+      <% else %>
+        <%= @order.delivery_instructions %>
+      <% end %>
+    </span>
+  </div>
+</fieldset>
