@@ -19,10 +19,16 @@ module SpreeDeliveryOptions
 
     def self.activate
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/controllers/**/*.rb')) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
+          begin
+              Rails.configuration.cache_classes ? require(c) : load(c)
+          rescue TypeError
+          end
       end
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*decorator*.rb')) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
+          begin
+              Rails.configuration.cache_classes ? require(c) : load(c)
+          rescue TypeError
+          end
       end
     end
 
