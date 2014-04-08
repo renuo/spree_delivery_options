@@ -1,0 +1,17 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+de:
+  activerecord:
+    errors:
+      models:
+        spree/order:
+          attributes:
+            delivery_date:
+              cannot_be_today_or_in_the_past: darf nicht in der Vergangenheit sein.
+              cannot_be_tomorrow_if_the_order_is_created_after: darf nicht Morgen sein, wenn Bestellung nach %{cut_off} Uhr aufgegeben.
+            delivery_instructions:
+              cannot_be_longer_than_500_charachters: darf nicht länger als 50 Zeichen sein.
+    attributes:
+      spree/order:
+        delivery_date: Lieferdatum

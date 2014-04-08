@@ -1,9 +1,7 @@
-<h4>
-  Delivery Date
-</h4>
+<h4><%= Spree.t('activerecord.attributes.spree/order.delivery_date') %></h4>
 <div id="delivery_date">
   <div class="field">
-    <%= form.label :delivery_date, "Delivery Date" %>
+    <%= form.label :delivery_date %>
     <%= form.date_field :delivery_date %>
   </div>
 </div>
