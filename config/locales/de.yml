@@ -2,7 +2,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 de:
-  activerecord:
+  activerecord: &active_record
     errors:
       models:
         spree/order:
@@ -15,3 +15,7 @@ de:
     attributes:
       spree/order:
         delivery_date: Lieferdatum
+
+  spree:
+    activerecord:
+      <<: *active_record
