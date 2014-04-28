@@ -22,6 +22,12 @@
   .delivery-time-options {
     display: none;
   }
+
+  .hint{
+    display: block;
+    margin-top: 1em;
+    font-size: 0.9em;
+  }
 }
 
 #delivery_instructions textarea {
