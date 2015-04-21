@@ -1,2 +1,2 @@
 //= require jquery
-//= require admin/delivery_time_options
+//= require spree/backend/delivery_time_options

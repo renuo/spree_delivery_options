@@ -1,3 +1,3 @@
 //= require jquery
-//= require store/delivery_time_options
-//= require store/jquery-ui-1.10.4.custom
+//= require spree/backend/delivery_time_options
+//= require spree/backend/jquery-ui-1.10.4.custom
